@@ -1,0 +1,134 @@
+.page-transition-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.page-transition-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #134575 0%, #1e9b96 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.star-loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.star-icon {
+  color: white;
+  animation: starPulse 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 0.8;
+  }
+}
+
+.star-particles {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  animation: particleFloat 2s ease-in-out infinite;
+}
+
+.particle-1 {
+  top: 20%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  top: 30%;
+  right: 20%;
+  animation-delay: 0.2s;
+}
+
+.particle-3 {
+  bottom: 30%;
+  left: 30%;
+  animation-delay: 0.4s;
+}
+
+.particle-4 {
+  bottom: 20%;
+  right: 30%;
+  animation-delay: 0.6s;
+}
+
+.particle-5 {
+  top: 50%;
+  left: 50%;
+  animation-delay: 0.8s;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+.loading-text {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+  animation: textFade 1.5s ease-in-out infinite;
+}
+
+@keyframes textFade {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.page-content {
+  transition: opacity 0.3s ease;
+}
+
+.page-content.show {
+  opacity: 1;
+}
+
+.page-content.hide {
+  opacity: 0;
+}

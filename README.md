@@ -1,217 +1,171 @@
-# Shopify Scraper
+# ScrapeMart - Professional Shopify Scraper
 
-A comprehensive web application for scraping product and collection data from Shopify stores, built with React and Node.js.
+A complete SaaS application for scraping Shopify stores with authentication, project management, and subscription billing.
 
 ## Features
 
-- **Product Scraping**: Extract product information including titles, prices, images, descriptions, and more
-- **Collection Scraping**: Scrape product collections with metadata
-- **Real-time Search**: Live filtering and search within scraped data
-- **Export Functionality**: Export data to CSV and JSON formats
-- **Pagination**: Handle large datasets with efficient pagination
-- **Responsive Design**: Mobile-friendly interface matching the original design
-- **Professional UI**: Clean, modern interface similar to shopify-scraper.com
+- **Professional Landing Page** with pricing plans
+- **User Authentication** (Sign Up, Sign In, Password Reset)
+- **Project Management** - Organize scraping tasks
+- **Live Scraping Preview** with real-time progress
+- **Advanced Filtering** by vendor, tags, price range, etc.
+- **Export Functionality** - CSV in Shopify format
+- **Team Collaboration** (Pro plan)
+- **Subscription Billing** with Stripe integration
+- **Usage Limits** - Free: 50 products, Pro: Unlimited
 
 ## Tech Stack
 
-### Backend
-- **Node.js** with Express.js
-- **Axios** for HTTP requests
-- **Cheerio** for HTML parsing
-- **CORS** for cross-origin requests
-- **Helmet** for security
-- **Rate limiting** for API protection
-
 ### Frontend
-- **React 18** with functional components
-- **Lucide React** for icons
-- **CSS3** with modern styling
-- **Responsive design** for all screen sizes
+- React 18
+- React Router
+- Supabase Auth
+- Stripe Elements
+- Lucide React (Icons)
 
-## Installation
+### Backend
+- Node.js + Express
+- Supabase (Database + Auth)
+- Stripe (Payments)
+- JWT Authentication
+- Rate Limiting
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd shopify-scrapper
-   ```
+## Setup Instructions
 
-2. **Install dependencies**
-   ```bash
-   npm run install-all
-   ```
+### 1. Supabase Setup
 
-3. **Set up environment variables**
-   Create a `.env` file in the `server` directory:
+1. Create a new Supabase project at [supabase.com](https://supabase.com)
+2. Run the SQL schema from `supabase-schema.sql` in your Supabase SQL editor
+3. Get your project URL and anon key from Settings > API
+
+### 2. Stripe Setup
+
+1. Create a Stripe account at [stripe.com](https://stripe.com)
+2. Get your API keys from the Stripe dashboard
+3. Create products and prices for your subscription plans
+4. Set up webhook endpoint: `https://yourdomain.com/api/billing/webhook`
+
+### 3. Environment Variables
+
+#### Server (.env)
    ```env
+# Server Configuration
    PORT=5000
    NODE_ENV=development
    CORS_ORIGIN=http://localhost:3000
+
+# Rate Limiting
    RATE_LIMIT_WINDOW_MS=900000
    RATE_LIMIT_MAX_REQUESTS=100
-   ```
 
-4. **Start the development servers**
-   ```bash
-   npm run dev
-   ```
+# Supabase Configuration
+SUPABASE_URL=your_supabase_url_here
+SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_SERVICE_KEY=your_supabase_service_role_key_here
 
-   This will start both the backend server (port 5000) and frontend development server (port 3000).
+# JWT Configuration
+JWT_SECRET=your_jwt_secret_key_here
+JWT_EXPIRES_IN=7d
 
-## Usage
+# Stripe Configuration
+STRIPE_SECRET_KEY=your_stripe_secret_key_here
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret_here
+STRIPE_PRICE_ID_FREE=price_free_id
+STRIPE_PRICE_ID_PRO=price_pro_id
 
-1. **Open your browser** and navigate to `http://localhost:3000`
+# Application URLs
+FRONTEND_URL=http://localhost:3000
+```
 
-2. **Enter a Shopify store URL** in the search input field
-   - Example: `https://example-store.myshopify.com`
-   - Or any valid Shopify store domain
+#### Client (.env)
+```env
+# Supabase Configuration
+REACT_APP_SUPABASE_URL=your_supabase_url_here
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 
-3. **Select data type** (Products or Collections)
+# Stripe Configuration
+REACT_APP_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key_here
 
-4. **Click the search button** to start scraping
+# API Configuration
+REACT_APP_API_URL=http://localhost:5000
+```
 
-5. **View results** in the table format with options to:
-   - Filter and search within results
-   - Select individual items or all items
-   - Export selected data
-   - Navigate through pages
+### 4. Installation
+
+```bash
+# Install server dependencies
+cd server
+npm install
+
+# Install client dependencies
+cd ../client
+npm install
+```
+
+### 5. Running the Application
+
+```bash
+# Start the server (from server directory)
+npm run dev
+
+# Start the client (from client directory)
+npm start
+```
+
+## Database Schema
+
+The application uses the following main tables:
+
+- **profiles** - User profiles extending Supabase auth
+- **projects** - Scraping projects
+- **products** - Scraped product data
+- **teams** - Team management
+- **team_members** - Team member relationships
+- **subscriptions** - Stripe subscription data
+- **scraping_jobs** - Scraping progress tracking
 
 ## API Endpoints
 
-### POST `/api/scraper/scrape`
-Scrape a Shopify store for products or collections.
+### Authentication Required
+- `POST /api/scraper/scrape` - Scrape Shopify store
+- `GET /api/projects` - Get user projects
+- `POST /api/projects` - Create project
+- `PUT /api/projects/:id` - Update project
+- `DELETE /api/projects/:id` - Delete project
+- `GET /api/projects/:id/products` - Get project products
+- `GET /api/stats` - Get user statistics
 
-**Request Body:**
-```json
-{
-  "url": "https://example-store.myshopify.com",
-  "type": "products", // or "collections"
-  "page": 1,
-  "limit": 50
-}
-```
+### Billing
+- `POST /api/billing/create-checkout-session` - Create Stripe checkout
+- `POST /api/billing/create-portal-session` - Create billing portal
+- `POST /api/billing/webhook` - Stripe webhook handler
 
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "products": [...], // or "collections"
-    "total": 100,
-    "hasMore": true,
-    "store": "https://example-store.myshopify.com"
-  },
-  "pagination": {
-    "page": 1,
-    "limit": 50,
-    "total": 100,
-    "hasMore": true
-  }
-}
-```
+## Deployment
 
-### GET `/api/scraper/products/:storeId`
-Scrape products from a specific store ID.
+### Frontend (Vercel/Netlify)
+1. Build the React app: `npm run build`
+2. Deploy the build folder
+3. Set environment variables
 
-### GET `/api/scraper/collections/:storeId`
-Scrape collections from a specific store ID.
+### Backend (Railway/Heroku)
+1. Deploy the server folder
+2. Set all environment variables
+3. Configure Stripe webhook URL
 
-### GET `/api/health`
-Health check endpoint.
+## Usage Limits
 
-## Project Structure
+- **Free Plan**: 50 products per month, 1 project
+- **Pro Plan**: Unlimited products, unlimited projects, team collaboration
 
-```
-shopify-scrapper/
-├── client/                 # React frontend
-│   ├── public/
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   │   ├── Header.js
-│   │   │   ├── SearchSection.js
-│   │   │   ├── ResultsSection.js
-│   │   │   ├── ProductsTable.js
-│   │   │   ├── CollectionsTable.js
-│   │   │   └── Pagination.js
-│   │   ├── App.js
-│   │   └── index.js
-│   └── package.json
-├── server/                 # Node.js backend
-│   ├── routes/
-│   │   └── scraper.js      # API routes
-│   ├── services/
-│   │   └── shopifyScraper.js # Scraping logic
-│   ├── index.js            # Server entry point
-│   └── package.json
-├── package.json            # Root package.json
-└── README.md
-```
+## Security Features
 
-## Features Overview
+- JWT authentication
+- Rate limiting
+- CORS protection
+- Input validation
+- SQL injection protection via Supabase
+- XSS protection
 
-### Scraping Capabilities
-- **Multiple endpoints**: Tries various Shopify API endpoints for maximum compatibility
-- **HTML fallback**: Falls back to HTML scraping when API endpoints fail
-- **Error handling**: Robust error handling with user-friendly messages
-- **Rate limiting**: Built-in rate limiting to prevent abuse
+## Support
 
-### UI Features
-- **Professional design**: Matches the original shopify-scraper.com design
-- **Responsive layout**: Works on desktop, tablet, and mobile devices
-- **Real-time search**: Live filtering of results
-- **Bulk selection**: Select all or individual items
-- **Export options**: Multiple export formats (CSV, JSON)
-
-### Data Processing
-- **Product data**: Title, price, images, description, vendor, type, availability
-- **Collection data**: Title, description, product count, metadata
-- **Image handling**: Automatic fallback for missing images
-- **Price formatting**: Proper currency and comparison price handling
-
-## Development
-
-### Running in Development Mode
-```bash
-npm run dev
-```
-
-### Running Backend Only
-```bash
-npm run server
-```
-
-### Running Frontend Only
-```bash
-npm run client
-```
-
-### Building for Production
-```bash
-npm run build
-```
-
-## Environment Variables
-
-Create a `.env` file in the `server` directory with the following variables:
-
-- `PORT`: Server port (default: 5000)
-- `NODE_ENV`: Environment (development/production)
-- `CORS_ORIGIN`: Allowed CORS origin (default: http://localhost:3000)
-- `RATE_LIMIT_WINDOW_MS`: Rate limit window in milliseconds
-- `RATE_LIMIT_MAX_REQUESTS`: Maximum requests per window
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## License
-
-MIT License - see LICENSE file for details.
-
-## Disclaimer
-
-This tool is for educational and research purposes only. Always respect website terms of service and robots.txt files. Use responsibly and in accordance with applicable laws and regulations.
+For support, please contact [your-email@domain.com]

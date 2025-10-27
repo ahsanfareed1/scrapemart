@@ -1,6 +1,8 @@
+@import './styles/globals.css';
+
 .App {
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: #f9fafb;
 }
 
 .main-content {
@@ -8,8 +10,8 @@
 }
 
 .error-message {
-  max-width: 1200px;
   margin: 20px auto;
+  width: 85%;
   padding: 0 20px;
 }
 

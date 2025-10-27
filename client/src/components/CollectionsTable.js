@@ -8,7 +8,8 @@ const CollectionsTable = ({
   selectedItems, 
   onSelectAll, 
   onSelectItem, 
-  onExport 
+  onExport,
+  onCollectionExport 
 }) => {
   const allSelected = collections.length > 0 && selectedItems.length === collections.length;
   const someSelected = selectedItems.length > 0 && selectedItems.length < collections.length;
@@ -109,8 +110,8 @@ const CollectionsTable = ({
                   </button>
                   <button 
                     className="action-btn"
-                    title="Export"
-                    onClick={() => onExport('csv', [collection])}
+                    title="Export Collection Products"
+                    onClick={() => onCollectionExport && onCollectionExport(collection.handle)}
                   >
                     <Download size={16} />
                   </button>

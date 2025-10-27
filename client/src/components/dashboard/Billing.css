@@ -1,0 +1,382 @@
+
+
+.current-plan-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.plan-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.5rem;
+}
+
+.plan-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #16a34a;
+  margin: 0;
+}
+
+.plan-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #f0fdf4;
+  color: #16a34a;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.938rem;
+}
+
+.usage-stats {
+  background: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.usage-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.usage-label {
+  color: #6b7280;
+  font-size: 0.938rem;
+}
+
+.usage-value {
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.upgrade-text {
+  color: #6b7280;
+  text-align: center;
+  margin: 0;
+  font-size: 0.938rem;
+}
+
+.pricing-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+
+.pricing-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1.5rem;
+}
+
+.current-plan-badge {
+  background: #16a34a;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.938rem;
+}
+
+.pricing-card.current {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+}
+
+/* Pricing Grid */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.pricing-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 2rem;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card.featured {
+  border-color: #134575;
+  box-shadow: 0 4px 15px rgba(19, 69, 117, 0.1);
+}
+
+.pricing-card.featured:hover {
+  box-shadow: 0 8px 30px rgba(19, 69, 117, 0.2);
+}
+
+.featured-badge {
+  position: absolute;
+  top: -12px;
+  background: linear-gradient(135deg, #134575, #1e9b96);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(19, 69, 117, 0.3);
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pricing-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #134575;
+  margin: 0 0 1rem;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.currency {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.amount {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #134575;
+  line-height: 1;
+}
+
+.period {
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  flex-grow: 1;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  color: #374151;
+  font-size: 0.938rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.pricing-features li:last-child {
+  border-bottom: none;
+}
+
+.pricing-features li svg {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.pricing-card .btn-primary {
+  margin-top: auto;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Dark Mode Styles */
+.dark .billing-page {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.dark .current-plan-card {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.dark .plan-header h3 {
+  color: var(--text-primary);
+}
+
+.dark .plan-name {
+  color: #22c55e;
+}
+
+.dark .plan-badge {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.dark .usage-stats {
+  background: var(--bg-primary);
+}
+
+.dark .usage-label {
+  color: var(--text-secondary);
+}
+
+.dark .usage-value {
+  color: var(--text-primary);
+}
+
+.dark .upgrade-text {
+  color: var(--text-secondary);
+}
+
+.dark .pricing-section {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.dark .pricing-section h3 {
+  color: var(--text-primary);
+}
+
+.dark .current-plan-badge {
+  background: #22c55e;
+}
+
+.dark .pricing-card.current {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+/* Dark mode pricing cards */
+.dark .pricing-card {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.dark .pricing-card:hover {
+  box-shadow: 0 10px 25px var(--shadow);
+}
+
+.dark .pricing-card.featured {
+  border-color: #1e9b96;
+  box-shadow: 0 4px 15px rgba(30, 155, 150, 0.2);
+}
+
+.dark .pricing-card.featured:hover {
+  box-shadow: 0 8px 30px rgba(30, 155, 150, 0.3);
+}
+
+.dark .featured-badge {
+  background: linear-gradient(135deg, #1e9b96, #22c55e);
+}
+
+.dark .pricing-header h3 {
+  color: var(--text-primary);
+}
+
+.dark .currency {
+  color: var(--text-secondary);
+}
+
+.dark .amount {
+  color: #1e9b96;
+}
+
+.dark .period {
+  color: var(--text-secondary);
+}
+
+.dark .pricing-features li {
+  color: var(--text-primary);
+  border-bottom-color: var(--border-color);
+}
+
+.dark .pricing-features li svg {
+  color: #22c55e;
+}
+
+.dark .progress-bar {
+  background: var(--border-color);
+}
+
+.dark .progress-fill {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+@media (max-width: 768px) {
+  .plan-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .plan-badge {
+    align-self: flex-start;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .pricing-card {
+    padding: 1.5rem;
+  }
+
+  .amount {
+    font-size: 2.5rem;
+  }
+
+  .featured-badge {
+    right: 1.5rem;
+    font-size: 0.813rem;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+
+
+
+

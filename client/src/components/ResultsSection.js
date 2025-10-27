@@ -10,10 +10,13 @@ const ResultsSection = ({
   searchType, 
   loading, 
   loadingProgress,
+  loadingCount,
+  isScraping,
   currentPage, 
   totalItems, 
   onPageChange, 
-  onExport 
+  onExport,
+  onCollectionExport 
 }) => {
   const [searchFilter, setSearchFilter] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
@@ -60,6 +63,7 @@ const ResultsSection = ({
   };
 
   const itemType = searchType === 'products' ? 'PRODUCTS' : 'COLLECTIONS';
+  const displayTotal = isScraping ? loadingCount : totalItems;
 
   return (
     <section className="results-section">
@@ -67,8 +71,18 @@ const ResultsSection = ({
         <div className="results-header">
           <div className="results-info">
             <h2 className="results-title">
-              TOTAL {itemType} {totalItems}
+              TOTAL {itemType} {displayTotal}
             </h2>
+            {isScraping && (
+              <div className="loading-indicator">
+                <div className="loading-dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <span className="loading-text">Scraping...</span>
+              </div>
+            )}
           </div>
           
           <div className="results-actions">
@@ -102,7 +116,7 @@ const ResultsSection = ({
         <Pagination
           currentPage={currentPage}
           totalItems={totalItems}
-          itemsPerPage={999999}
+          itemsPerPage={50}
           onPageChange={onPageChange}
           loading={loading}
         />
@@ -134,6 +148,7 @@ const ResultsSection = ({
               onSelectAll={handleSelectAll}
               onSelectItem={handleSelectItem}
               onExport={onExport}
+              onCollectionExport={onCollectionExport}
             />
           )}
         </div>

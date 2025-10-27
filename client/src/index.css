@@ -40,7 +40,6 @@ code {
 
 /* Utility classes */
 .container {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -60,23 +59,54 @@ code {
 }
 
 .btn-primary {
-  background-color: #20b2aa;
-  color: white;
+  background: linear-gradient(135deg, #134575 0%, #1e9b96 100%) !important;
+  color: white !important;
+  border: none;
+  box-shadow: 0 2px 4px rgba(19, 69, 117, 0.2);
 }
 
 .btn-primary:hover {
-  background-color: #1a9b94;
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #0f3558 0%, #1a8a85 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(19, 69, 117, 0.3);
+  color: white !important;
+}
+
+.btn-primary:disabled {
+  background: linear-gradient(135deg, #9ca3af 0%, #9ca3af 100%) !important;
+  color: white !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Ensure all button text is visible */
+.btn-primary *,
+.btn-primary span,
+.btn-primary svg {
+  color: white !important;
+  fill: white !important;
+}
+
+.btn-primary:hover *,
+.btn-primary:hover span,
+.btn-primary:hover svg {
+  color: white !important;
+  fill: white !important;
 }
 
 .btn-secondary {
-  background-color: #f8f9fa;
-  color: #333;
-  border: 1px solid #dee2e6;
+  background: white;
+  color: #134575;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .btn-secondary:hover {
-  background-color: #e9ecef;
+  background: #f9fafb;
+  border-color: #134575;
+  color: #134575;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(19, 69, 117, 0.1);
 }
 
 .btn-danger {
